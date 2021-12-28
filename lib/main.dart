@@ -122,7 +122,7 @@ class _MainPageState extends State<MainPage> {
   }
 
   Widget buildListTiled(BankName item) => ListTile(
-        contentPadding: EdgeInsets.symmetric(
+        contentPadding: const EdgeInsets.symmetric(
           horizontal: 16,
           vertical: 16,
         ),
@@ -135,7 +135,7 @@ class _MainPageState extends State<MainPage> {
           children: [
             Text(
               item.name,
-              style: TextStyle(fontWeight: FontWeight.bold),
+              style: const TextStyle(fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 4),
             Text(item.accountNumber)

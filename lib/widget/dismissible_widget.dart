@@ -33,12 +33,12 @@ class DismissibleWidget<T> extends StatelessWidget {
     height: 96,
     width: MediaQuery.of(context).size.width,
     decoration:  BoxDecoration(
-      color: Color(0xFF8795A7),
+      color: const Color(0xFF8795A7),
       borderRadius: BorderRadius.circular(16),
       shape: BoxShape.rectangle,
     ),
         alignment: Alignment.centerRight,
-        padding: EdgeInsets.symmetric(horizontal: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: const [
