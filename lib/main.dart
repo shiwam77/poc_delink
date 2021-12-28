@@ -41,6 +41,7 @@ class _MainPageState extends State<MainPage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const SizedBox(height: 16,),
+
                 const Text("Link your bank account",
                     overflow: TextOverflow.ellipsis,
                     softWrap: false,
@@ -51,7 +52,9 @@ class _MainPageState extends State<MainPage> {
                         fontWeight: FontWeight.bold,
                         letterSpacing: 0.6
                     )),
+
                 const SizedBox(height: 8,),
+
                 const Text("Please confirm to submit your details",
                     overflow: TextOverflow.ellipsis,
                     softWrap: false,
@@ -61,7 +64,9 @@ class _MainPageState extends State<MainPage> {
                         fontSize: 14,
                         letterSpacing: 0.6
                     )),
+
                 const SizedBox(height: 16,),
+
                 Expanded(
                   child: ListView.builder(
                     itemCount: items.length,
@@ -208,7 +213,7 @@ class _MainPageState extends State<MainPage> {
                   ],
                 ),
               ),
-              
+
             ],
           ),
 
