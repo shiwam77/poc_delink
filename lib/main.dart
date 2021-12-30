@@ -6,6 +6,8 @@ import 'package:poc_delink/model/bank.dart';
 import 'package:poc_delink/utils.dart';
 import 'package:poc_delink/widget/dismissible_widget.dart';
 
+import 'account_aggregator/view/mandatory_user.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -13,9 +15,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) => MaterialApp(
         debugShowCheckedModeBanner: false,
-
-        theme: ThemeData(primarySwatch: Colors.deepOrange),
-        home: const MainPage(),
+        home: const MandatoryUser(),
       );
 }
 
