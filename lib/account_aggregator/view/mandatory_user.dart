@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:poc_delink/account_aggregator/config/theme/colors.dart';
 import 'package:poc_delink/account_aggregator/constant/app_image.dart';
+import 'package:poc_delink/account_aggregator/widget/custom_button.dart';
 
+import 'bank_account_list.dart';
 import 'learn_more_view.dart';
 
 class MandatoryUser extends StatefulWidget {
@@ -61,7 +63,7 @@ class _MandatoryUserState extends State<MandatoryUser> {
                    const Text("provide financial information of bank accounts linked to +91 889004126",
                      textAlign: TextAlign.center,
                        style:  TextStyle(
-                       color: AppColors.primaryColor100,
+                       color: AppColors.primaryColor200,
                        fontSize: 14,
                        height: 1.2,
                        fontWeight: FontWeight.normal,
@@ -90,31 +92,10 @@ class _MandatoryUserState extends State<MandatoryUser> {
 
                   const Spacer(),
 
-                   InkWell(
-                     onTap: (){
-
-                     },
-                     child: Container(
-                      height: 48,
-                      width: double.infinity,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        color: AppColors.primaryColor,
-                        shape: BoxShape.rectangle,
-                        borderRadius: BorderRadius.circular(100)
-                      ),
-                      child: const Text("Continue",
-                          overflow: TextOverflow.ellipsis,
-                          softWrap: false,
-                          maxLines: 1,
-                          style: TextStyle(
-                              color: AppColors.whiteBackgroundColor,
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              letterSpacing: 0.6
-                          )),
+                  CustomButton(onTap: (){
+                    routeToBankAccountLinkList(context);
+                  }, label: 'Continue',
                   ),
-                   ),
 
                   const SizedBox(
                     height: 25,
@@ -162,4 +143,12 @@ class _MandatoryUserState extends State<MandatoryUser> {
             builder: (BuildContext context) => const LearMoreView(),
              ),);
   }
+
+
+}
+
+void routeToBankAccountLinkList(context){
+  Navigator.push(context,  MaterialPageRoute<void>(
+    builder: (BuildContext context) => const BankAccountList(),
+  ),);
 }

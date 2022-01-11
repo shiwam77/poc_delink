@@ -6,6 +6,8 @@ class AppImages {
 
   static var oneMoneySdkLogo ='assets/oneMoneyLogo.png';
 
+  static var noBankAccount ='assets/Frame.svg';
+
   static Widget toSvgWidget(String assetName, String label,
       {double height=200, double width=200}) {
 

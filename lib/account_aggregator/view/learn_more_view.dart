@@ -34,9 +34,17 @@ class _LearMoreViewState extends State<LearMoreView> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
 
-                              const  SizedBox(
+                                Container(
                                   height: 52,
+                                  alignment: Alignment.bottomLeft,
+                                  child:    InkWell(
+                                    onTap: (){
+                                      Navigator.pop(context);
+                                    },
+                                      child: const Icon(Icons.close,color: AppColors.lightGray100,size: 16,)),
                                 ),
+
+
 
                               Center(
                                 child: SvgPicture.asset(
@@ -86,7 +94,7 @@ class _LearMoreViewState extends State<LearMoreView> {
                                  child: Text(AppString.accountAggregator,
                                     softWrap: true,
                                     style: const TextStyle(
-                                        color: AppColors.primaryColor100,
+                                        color: AppColors.primaryColor200,
                                         fontSize: 14,
                                         fontWeight: FontWeight.normal,
                                         letterSpacing: 0.6
@@ -118,12 +126,18 @@ class _LearMoreViewState extends State<LearMoreView> {
                                       letterSpacing: 0.6
                                   )),
 
+                              const SizedBox(
+                                height: 16,
+                              ),
+
                               SizedBox(
-                                height: MediaQuery.of(context).size.height  * .5,
+                                height: MediaQuery.of(context).size.height  * .7,
                                 child: GridView.builder(
-                                    shrinkWrap: true,
+                                  primary: false,
+                                  shrinkWrap: true,
+                                  physics: const NeverScrollableScrollPhysics(),
                                     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
-                                    itemCount: 10,
+                                    itemCount: 13,
                                     itemBuilder: (context,index){
                                       return itemBuilder();
                                     },
@@ -150,7 +164,7 @@ class _LearMoreViewState extends State<LearMoreView> {
                               const Text("information collected by slice will be used for following purposes - ",
                                   softWrap: true,
                                   style: TextStyle(
-                                      color: AppColors.primaryColor100,
+                                      color: AppColors.primaryColor200,
                                       fontSize: 14,
                                       fontWeight: FontWeight.normal,
                                       letterSpacing: 0.6
@@ -191,7 +205,7 @@ class _LearMoreViewState extends State<LearMoreView> {
 
                                 ),
                                 child: TextField(
-                                  style: const TextStyle(color: AppColors.primaryColor100,fontSize: 16),
+                                  style: const TextStyle(color: AppColors.primaryColor200,fontSize: 16),
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(100),
@@ -259,14 +273,14 @@ class _LearMoreViewState extends State<LearMoreView> {
           margin: const EdgeInsets.only(top: 7,right: 8,left: 8),
           decoration: const BoxDecoration(
               shape: BoxShape.circle,
-              color: AppColors.primaryColor100
+              color: AppColors.primaryColor200
           ),
         ),
         Flexible(
           child: Text(text,
               softWrap: true,
               style: const TextStyle(
-                  color: AppColors.primaryColor100,
+                  color: AppColors.primaryColor200,
                   fontSize: 14,
                   fontWeight: FontWeight.normal,
                   letterSpacing: 0.4
@@ -304,7 +318,7 @@ class _LearMoreViewState extends State<LearMoreView> {
               softWrap: true,
               maxLines: 2,
               style: TextStyle(
-                  color: AppColors.primaryColor100,
+                  color: AppColors.primaryColor200,
                   fontSize: 12,
                   fontWeight: FontWeight.normal,
                   letterSpacing: 0.2

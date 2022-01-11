@@ -36,6 +36,13 @@ dependencies:
   cupertino_icons: ^1.0.2
 
   flutter_svg: ^0.21.0+1
+  shimmer: ^2.0.0
+  sms_autofill: ^2.2.0
+  alt_sms_autofill: ^1.0.0
+  file_saver: ^0.0.10
+  path_provider:
+  excel:
+  permission_handler:
 
 dev_dependencies:
   flutter_test:
