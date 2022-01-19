@@ -6,6 +6,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:poc_delink/account_aggregator/config/theme/colors.dart';
 import 'package:poc_delink/account_aggregator/constant/app_image.dart';
 import 'package:poc_delink/account_aggregator/widget/custom_button.dart';
+import 'package:poc_delink/account_aggregator/widget/widget.dart';
 
 import 'bank_account_list.dart';
 import 'learn_more_view.dart';
@@ -101,30 +102,7 @@ class _MandatoryUserState extends State<MandatoryUser> {
                     height: 25,
                   ),
 
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-
-                    children:  [
-                      const Text("Powered by  ",
-                          overflow: TextOverflow.ellipsis,
-                          softWrap: false,
-                          maxLines: 1,
-                          style: TextStyle(
-                              color: AppColors.lightBlack,
-                              fontSize: 11,
-                              fontWeight: FontWeight.bold,
-                              letterSpacing: 0.4
-                          )),
-
-                      Image.asset(
-                        AppImages.oneMoneySdkLogo,
-                        fit: BoxFit.contain,
-                        height: 18,
-                        width: 62,
-                      ),
-                    ],
-                  ),
+                  poweredByWidget(),
 
                   const SizedBox(
                     height: 22,

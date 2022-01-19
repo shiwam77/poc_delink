@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:poc_delink/account_aggregator/config/theme/colors.dart';
 import 'package:poc_delink/account_aggregator/constant/app_image.dart';
 import 'package:poc_delink/account_aggregator/constant/app_string.dart';
+import 'package:poc_delink/account_aggregator/widget/widget.dart';
 
 class LearMoreView extends StatefulWidget {
   const LearMoreView({Key? key}) : super(key: key);
@@ -34,7 +35,7 @@ class _LearMoreViewState extends State<LearMoreView> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
 
-                                Container(
+                              Container(
                                   height: 52,
                                   alignment: Alignment.bottomLeft,
                                   child:    InkWell(
@@ -43,8 +44,6 @@ class _LearMoreViewState extends State<LearMoreView> {
                                     },
                                       child: const Icon(Icons.close,color: AppColors.lightGray100,size: 16,)),
                                 ),
-
-
 
                               Center(
                                 child: SvgPicture.asset(
@@ -256,12 +255,7 @@ class _LearMoreViewState extends State<LearMoreView> {
     );
   }
 
-  InputBorder outLineCustomInputBorder({required double radius,required Color color}){
-    return OutlineInputBorder(
-      borderRadius: BorderRadius.all(Radius.circular(radius)),
-      borderSide: BorderSide(color: color,),
-    );
-  }
+
 
   Widget dottedText(String text){
     return  Row(

@@ -313,7 +313,7 @@ class _BottomWidgetState extends State<BottomWidget> {
                  padding: const EdgeInsets.only(bottom: 5),
                  child: Checkbox(value: isChecked,
                   checkColor: Colors.white,
-              fillColor: MaterialStateProperty.resolveWith(getColor),
+                  fillColor: MaterialStateProperty.resolveWith(getColor),
                   onChanged: (bool? value) {
                   setState(() {
                     isChecked = !isChecked;

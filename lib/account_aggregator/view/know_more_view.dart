@@ -66,14 +66,7 @@ class _KnowMoreState extends State<KnowMore> {
                   ),
                 ),
 
-                SizedBox(
-                  height: 20,
-                  child: LoadingIndicator(
-                    colors: [AppColors.primaryColor],
-                    strokeWidth: 1.0,
-                    pathBackgroundColor: Colors.black45 ,
-                  ),
-                ),
+
 
                 const SizedBox(
                   height: 24,

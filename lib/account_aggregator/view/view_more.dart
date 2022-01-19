@@ -81,7 +81,7 @@ class _ViewMoreState extends State<ViewMore> {
                 itemBuilder: (context,index){
                   String tittle = info.keys.toList()[index];
                   String subTittle = info.values.toList()[index];
-                  return selectedBankItemBuilder();
+                  return const SelectedBankItemBuilder(isSelected: true,);
                 }),
 
           ],
@@ -186,3 +186,100 @@ class _ViewMoreState extends State<ViewMore> {
   }
 
 }
+
+class SelectedBankItemBuilder extends StatefulWidget {
+  final bool isSelected;
+  const SelectedBankItemBuilder({Key? key,this.isSelected = true}) : super(key: key);
+
+  @override
+  _SelectedBankItemBuilderState createState() => _SelectedBankItemBuilderState();
+}
+
+class _SelectedBankItemBuilderState extends State<SelectedBankItemBuilder> {
+  late bool isSelected;
+
+  @override
+  void initState() {
+    isSelected = widget.isSelected;
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return  Padding(
+      padding: const EdgeInsets.symmetric(vertical: 9),
+      child: Row(
+        children: [
+          InkWell(
+            onTap: (){
+              print(isSelected);
+             setState(() {
+               isSelected = !isSelected;
+
+             });
+            },
+            child: Container(
+                height: 20,
+                width: 20,
+                alignment: Alignment.center,
+                decoration: !isSelected ? const BoxDecoration(
+                    color: AppColors.whiteBackgroundColor,
+                    shape: BoxShape.circle,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey,
+                      blurRadius: 2.0,
+                    ),],
+                )
+                    : const BoxDecoration(
+                    color: AppColors.primaryColor100,
+                    shape: BoxShape.circle
+                ),
+                child: isSelected ? const Icon(Icons.done,size: 10,color: AppColors.whiteBackgroundColor,) : const SizedBox()),
+          ),
+          Row(
+            children: [
+
+              const SizedBox(width: 10,),
+
+              Text("HDFC",
+                overflow: TextOverflow.ellipsis,
+                style: customTextStyle(),),
+
+              const SizedBox(width: 8,),
+
+              const Icon(Icons.circle,size: 4,color: AppColors.lightGray100,),
+
+              const SizedBox(width: 8,),
+
+              Text("xx 4212",
+                overflow: TextOverflow.ellipsis,
+                style: customTextStyle(),),
+
+              const SizedBox(width: 8,),
+
+              const Icon(Icons.circle,size: 4,color: AppColors.lightGray100,),
+
+              const SizedBox(width: 8,),
+
+              Text("xx 4212",
+                overflow: TextOverflow.ellipsis,
+                style: customTextStyle(),),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  TextStyle customTextStyle([Color color = AppColors.lightGray100,double fontSize = 12,fontWeight = FontWeight.normal,double letterSpacing = .4,]){
+    return   TextStyle(
+      color: color,
+      fontSize: fontSize,
+      fontWeight:fontWeight,
+      letterSpacing:letterSpacing,
+    );
+  }
+
+}
+

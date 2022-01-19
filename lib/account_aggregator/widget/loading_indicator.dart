@@ -7,203 +7,6 @@ import 'package:flutter/services.dart';
 import 'package:poc_delink/account_aggregator/config/theme/colors.dart';
 import 'package:sms_autofill/sms_autofill.dart';
 
-/// BallPulseSync.
-class BallPulseSync extends StatefulWidget {
-  const BallPulseSync({Key? key}) : super(key: key);
-
-  @override
-  _BallPulseSyncState createState() => _BallPulseSyncState();
-}
-
-class _BallPulseSyncState extends State<BallPulseSync>
-    with TickerProviderStateMixin {
-  static const _beginTimes = [70, 140, 210];
-
-  final List<AnimationController> _animationControllers = [];
-  final List<Animation<double>> _animations = [];
-  final List<CancelableOperation<int>> _delayFeatures = [];
-
-  @override
-  void initState() {
-    super.initState();
-    for (int i = 0; i < 3; i++) {
-      _animationControllers.add(AnimationController(
-          vsync: this, duration: const Duration(milliseconds: 600)));
-
-      _animations.add(TweenSequence([
-        TweenSequenceItem(tween: Tween(begin: 0.0, end: 1.0), weight: 1),
-        TweenSequenceItem(tween: Tween(begin: 1.0, end: -1.0), weight: 1),
-        TweenSequenceItem(tween: Tween(begin: -1.0, end: 0.0), weight: 1),
-      ]).animate(CurvedAnimation(
-          parent: _animationControllers[i], curve: Curves.easeInOut)));
-
-      _delayFeatures.add(CancelableOperation.fromFuture(
-          Future.delayed(Duration(milliseconds: _beginTimes[i])).then((t) {
-            _animationControllers[i].repeat();
-            return 0;
-          })));
-    }
-  }
-
-  @override
-  void dispose() {
-    for (var f in _delayFeatures) {
-      f.cancel();
-    }
-    for (var f in _animationControllers) {
-      f.dispose();
-    }
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return LayoutBuilder(builder: (ctx, constraint) {
-      final circleSize = (constraint.maxWidth - 4) / 3;
-      final deltaY = (constraint.maxHeight / 2 - circleSize) / 2;
-
-      List<Widget> widgets = List.filled(5, Container());
-      for (int i = 0; i < 5; i++) {
-        if (i.isEven) {
-          widgets[i] = Expanded(
-            child: AnimatedBuilder(
-              animation: _animationControllers[i ~/ 2],
-              builder: (_, child) {
-                return Transform.translate(
-                  offset: Offset(0, _animations[i ~/ 2].value * deltaY),
-                  child: child,
-                );
-              },
-              child: const Icon(Icons.circle,color:AppColors.primaryColor,size: 10,),
-            ),
-          );
-        } else {
-          widgets[i] = const Expanded(
-            child: SizedBox(),
-          );
-        }
-      }
-
-      return Row(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: widgets,
-      );
-    });
-  }
-}
-
-
-
-
-
-
-
-const double _kDefaultStrokeWidth = 2;
-
-/// Information about a piece of animation (e.g., color).
-@immutable
-class DecorateData {
-  final Color? backgroundColor;
-
-
-  /// It will promise at least one value in the collection.
-  final List<Color> colors;
-  final double? _strokeWidth;
-
-  /// Applicable to which has cut edge of the shape
-  final Color? pathBackgroundColor;
-
-  const DecorateData({
-    required this.colors,
-    this.backgroundColor,
-    double? strokeWidth,
-    this.pathBackgroundColor,
-  })  : _strokeWidth = strokeWidth,
-        assert(colors.length > 0);
-
-  double get strokeWidth => _strokeWidth ?? _kDefaultStrokeWidth;
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-          other is DecorateData &&
-              runtimeType == other.runtimeType &&
-              backgroundColor == other.backgroundColor &&
-              colors == other.colors &&
-              strokeWidth == other.strokeWidth;
-
-  @override
-  int get hashCode =>
-      backgroundColor.hashCode ^
-      colors.hashCode ^
-      strokeWidth.hashCode;
-
-  @override
-  String toString() {
-    return 'DecorateData{backgroundColor: $backgroundColor, colors: $colors, strokeWidth: $strokeWidth}';
-  }
-}
-
-/// Establishes a subtree in which decorate queries resolve to the given data.
-class DecorateContext extends InheritedWidget {
-  final DecorateData decorateData;
-
-  const DecorateContext({
-    Key? key,
-    required this.decorateData,
-    required Widget child,
-  }) : super(key: key, child: child);
-
-  @override
-  bool updateShouldNotify(DecorateContext oldWidget) =>
-      oldWidget.decorateData == decorateData;
-
-  static DecorateContext? of(BuildContext context) {
-    return context.dependOnInheritedWidgetOfExactType();
-  }
-}
-
-
-/// Entrance of the loading.
-class LoadingIndicator extends StatelessWidget {
-
-
-  /// The color you draw on the shape.
-  final List<Color>? colors;
-  final Color? backgroundColor;
-
-  /// The stroke width of line.
-  final double? strokeWidth;
-
-  /// Applicable to which has cut edge of the shape
-  final Color? pathBackgroundColor;
-
-  const LoadingIndicator({
-    Key? key,
-    this.colors,
-    this.backgroundColor,
-    this.strokeWidth,
-    this.pathBackgroundColor,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    List<Color> safeColors = colors == null || colors!.isEmpty
-        ? [Theme.of(context).primaryColor]
-        : colors!;
-    return AspectRatio(
-      aspectRatio: 1,
-      child: Container(
-        color: backgroundColor,
-        child: const BallPulseSync(),
-      ),
-    );
-  }
-
-}
-
-
-
 
 class HomePageSmsAutoFill extends StatefulWidget {
   @override
@@ -420,5 +223,114 @@ class _AltsmsfillState extends State<Altsmsfill> {
         ),
       ),
     );
+  }
+}
+
+
+class WavingDots extends StatefulWidget {
+  final double size;
+  final Color color;
+  final int time;
+
+  const WavingDots({
+    Key? key,
+    required this.size,
+    required this.color,
+    required this.time,
+  }) : super(key: key);
+
+  @override
+  _WavingDotsState createState() => _WavingDotsState();
+}
+
+class _WavingDotsState extends State<WavingDots>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: widget.time),
+    )..repeat();
+  }
+
+  Widget _buildDot(
+      {required Offset begin,
+        required Offset end,
+        required Interval interval}) =>
+      Transform.translate(
+        offset: Tween<Offset>(begin: begin, end: end)
+            .animate(
+          CurvedAnimation(
+            parent: _controller,
+            curve: interval,
+          ),
+        )
+            .value,
+        child: Container(
+          width: widget.size / 5,
+          height: widget.size / 5,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: widget.color,
+          ),
+        ),
+      );
+
+  Widget _buildBottomDot({required double begin, required double end}) {
+    final double offset = -widget.size / 4;
+    return _buildDot(
+      begin: Offset.zero,
+      end: Offset(0.0, offset),
+      interval: Interval(begin, end),
+    );
+  }
+
+  Widget _buildTopDot({required double begin, required double end}) {
+    final double offset = -widget.size / 4;
+    return _buildDot(
+      begin: Offset(0.0, offset),
+      end: Offset.zero,
+      interval: Interval(begin, end),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final double size = widget.size;
+    return AnimatedBuilder(
+      animation: _controller,
+      builder: (_, __) => SizedBox(
+        width: size,
+        height: size,
+        child: Stack(
+          alignment: Alignment.center,
+          children: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                _controller.value <= 0.50
+                    ? _buildBottomDot(begin: 0.12, end: 0.50)
+                    : _buildTopDot(begin: 0.62, end: 1.0),
+                _controller.value <= 0.44
+                    ? _buildBottomDot(begin: 0.06, end: 0.44)
+                    : _buildTopDot(begin: 0.56, end: 0.94),
+                _controller.value <= 0.38
+                    ? _buildBottomDot(begin: 0.0, end: 0.38)
+                    : _buildTopDot(begin: 0.50, end: 0.88),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 }
