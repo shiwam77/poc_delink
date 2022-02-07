@@ -7,8 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:poc_delink/account_aggregator/config/theme/colors.dart';
-import 'package:poc_delink/account_aggregator/constant/app_image.dart';
-import 'package:poc_delink/account_aggregator/widget/loading_indicator.dart';
 import 'package:poc_delink/account_aggregator/widget/timer.dart';
 import 'package:poc_delink/account_aggregator/widget/widget.dart';
 import 'package:sms_autofill/sms_autofill.dart';

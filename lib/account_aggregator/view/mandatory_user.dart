@@ -94,7 +94,8 @@ class _MandatoryUserState extends State<MandatoryUser> {
                   const Spacer(),
 
                   CustomButton(onTap: (){
-                    routeToBankAccountLinkList(context);
+                    // routeToBankAccountLinkList(context);
+                    showAlertDialog(context);
                   }, label: 'Continue',
                   ),
 
@@ -129,4 +130,37 @@ void routeToBankAccountLinkList(context){
   Navigator.push(context,  MaterialPageRoute<void>(
     builder: (BuildContext context) => const BankAccountList(),
   ),);
+}
+
+showAlertDialog(BuildContext context) {
+
+
+  Widget cancelButton = TextButton(
+    child: const Text("Cancel"),
+    onPressed:  () {
+      Navigator.pop(context);
+    },
+  );
+  Widget continueButton = TextButton(
+    child: const Text("Exit"),
+    onPressed:  () {},
+  );
+
+
+  AlertDialog alert = AlertDialog(
+    title: const Text("AlertDialog"),
+    content: const Text("Would you like to continue learning how to use Flutter alerts?"),
+    actions: [
+      cancelButton,
+      continueButton,
+    ],
+  );
+
+  // show the dialog
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
 }
